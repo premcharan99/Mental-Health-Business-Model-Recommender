@@ -1,33 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Visualizations - Mental Health Business Model Recommender</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="navbar-brand">Mental Health Recommender</div>
-        <ul class="navbar-links">
-            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
-            <li><a href="{{ url_for('dataset') }}">Dataset</a></li>
-            <li><a href="{{ url_for('visualizations') }}" class="active">Visualizations</a></li>
-            <li><a href="{{ url_for('instructions') }}">Instructions</a></li>
-        </ul>
-    </nav>
-    <div class="container">
-        <h1>Dataset Visualizations</h1>
-        <div class="section fade-in">
-            <h2>Service Type Distribution</h2>
-            <div id="service-chart"></div>
-            <h2>Business Model Distribution</h2>
-            <div id="model-chart"></div>
-            <script>
-                Plotly.newPlot('service-chart', {{ service_json | safe }});
-                Plotly.newPlot('model-chart', {{ model_json | safe }});
-            </script>
-        </div>
-    </div>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Visualizations{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Visualizations</h1>
+    <h2>Service Type Distribution</h2>
+    <div id="service-type-chart"></div>
+    <h2>Business Model Distribution</h2>
+    <div id="business-model-chart"></div>
+    <script>
+        var graph1 = {{ graph1_json | safe }};
+        Plotly.newPlot('service-type-chart', graph1.data, graph1.layout);
+        var graph2 = {{ graph2_json | safe }};
+        Plotly.newPlot('business-model-chart', graph2.data, graph2.layout);
+    </script>
+</div>
+{% endblock %}

@@ -1,188 +1,102 @@
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #F7F7F5;
+    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
+    background-color: #f0f4f8;
     color: #333;
 }
 
-.navbar {
-    background-color: #4A90E2;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.navbar-brand {
+.sidebar {
+    width: 200px;
+    background-color: #4F46E5;
     color: white;
+    height: 100vh;
+    position: fixed;
+    padding: 20px;
+}
+
+.sidebar h2 {
     font-size: 1.5em;
-    font-weight: bold;
+    margin-bottom: 20px;
 }
 
-.navbar-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-.navbar-links li {
-    margin-left: 20px;
-}
-
-.navbar-links a {
+.sidebar a {
     color: white;
     text-decoration: none;
-    font-size: 1.1em;
-    transition: color 0.3s ease;
+    display: block;
+    margin: 10px 0;
 }
 
-.navbar-links a:hover, .navbar-links a.active {
-    color: #F7DC6F;
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+.content {
+    margin-left: 220px;
+    padding: 20px;
 }
 
 .container {
     max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    margin: 0 auto;
 }
 
-h1 {
-    color: #4A90E2;
-    text-align: center;
-    margin-bottom: 20px;
+h1, h2 {
+    color: #4F46E5;
 }
 
-.section {
-    margin-bottom: 30px;
-}
-
-h2 {
-    color: #333;
-    font-size: 1.4em;
-    margin-bottom: 15px;
-}
-
-.form-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    width: 200px;
-    font-weight: 500;
-    color: #555;
-}
-
-.form-group select, .form-group input {
-    width: 250px;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1em;
-    transition: border-color 0.3s ease;
-}
-
-.form-group select:focus, .form-group input:focus {
-    border-color: #50C878;
-    outline: none;
-}
-
-button {
-    display: block;
-    width: 120px;
-    margin: 20px auto;
-    padding: 10px;
-    background-color: #50C878;
+.btn {
+    background-color: #10B981;
     color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.3s ease;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
 }
 
-button:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
+.btn:hover {
+    background-color: #0a8b67;
 }
 
-.results {
-    padding: 20px;
-    background-color: #E6F0FA;
-    border-radius: 8px;
+form {
+    display: grid;
+    gap: 10px;
+    max-width: 500px;
 }
 
-.results ul {
-    list-style: none;
-    padding: 0;
+label {
+    font-weight: bold;
 }
 
-.results li {
-    margin: 10px 0;
-    font-size: 1.1em;
-    color: #333;
+select, input {
+    padding: 8px;
+    border: 1px solid #4F46E5;
+    border-radius: 5px;
 }
 
-.visualizations {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-
-#bar-chart, #pie-chart, #service-chart, #model-chart {
-    width: 48%;
-    height: 300px;
-}
-
-.table {
+table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin: 20px 0;
 }
 
-.table th, .table td {
-    border: 1px solid #ddd;
-    padding: 8px;
+th, td {
+    border: 1px solid #4F46E5;
+    padding: 10px;
     text-align: left;
 }
 
-.table th {
-    background-color: #4A90E2;
+th {
+    background-color: #4F46E5;
     color: white;
 }
 
-.table-striped tbody tr:nth-child(odd) {
-    background-color: #f9f9f9;
-}
-
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #50C878;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    transition: transform 0.2s ease, background-color 0.3s ease;
-}
-
-.button:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
-}
-
-.fade-in {
-    animation: fadeIn 0.5s ease-in;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .content {
+        margin-left: 0;
+    }
 }

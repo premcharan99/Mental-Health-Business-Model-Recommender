@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Mental Health Business Model Recommender</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
@@ -17,129 +19,150 @@
         </ul>
     </nav>
     <div class="container">
-        <h1>Prediction Dashboard</h1>
-        <div class="section fade-in">
-            <h2>Enter Details</h2>
+        <div class="card">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto 48px auto;">
+                <h1 style="margin-bottom: 16px;">Mental Health Business Model Recommender</h1>
+                <p style="color: #666; font-size: 1.1em; line-height: 1.6;">Our AI-powered system analyzes your business requirements and recommends the most suitable business model for your mental health service. Fill out the form below to get started.</p>
+            </div>
+            
+            <div class="section fade-in">
+                <h2 style="color: #20BEFF; font-size: 1.2em; margin-bottom: 24px;">Enter Your Business Details</h2>
             <form method="POST">
-                <div class="form-group">
-                    <label>Service Type:</label>
-                    <select name="service_type">
-                        {% for option in options['service_type'] %}
-                            <option value="{{ option }}">{{ option }}</option>
-                        {% endfor %}
-                    </select>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label><i class="fas fa-briefcase" style="color: #20BEFF; margin-right: 8px;"></i>Service Type</label>
+                        <select name="service_type">
+                            {% for option in options['service_type'] %}
+                                <option value="{{ option }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-building" style="color: #20BEFF; margin-right: 8px;"></i>Ownership</label>
+                        <select name="ownership">
+                            {% for option in options['ownership'] %}
+                                <option value="{{ option }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-dollar-sign" style="color: #20BEFF; margin-right: 8px;"></i>Budget (in thousands)</label>
+                        <input type="number" name="budget_k" min="5" max="500" value="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-users" style="color: #20BEFF; margin-right: 8px;"></i>Target Age Group</label>
+                        <select name="target_age_group">
+                            {% for option in options['target_age_group'] %}
+                                <option value="{{ option }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-map-marker-alt" style="color: #20BEFF; margin-right: 8px;"></i>Location</label>
+                        <select name="location">
+                            {% for option in options['location'] %}
+                                <option value="{{ option }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-chart-line" style="color: #20BEFF; margin-right: 8px;"></i>Market Demand</label>
+                        <select name="market_demand">
+                            {% for option in options['market_demand'] %}
+                                <option value="{{ option }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-laptop-medical" style="color: #20BEFF; margin-right: 8px;"></i>Delivery Mode</label>
+                        <select name="delivery_mode">
+                            {% for option in options['delivery_mode'] %}
+                                <option value="{{ option }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-money-bill" style="color: #20BEFF; margin-right: 8px;"></i>Payment - Cash</label>
+                        <select name="payment_cash">
+                            {% for option in options['payment_cash'] %}
+                                <option value="{{ option }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-file-medical" style="color: #20BEFF; margin-right: 8px;"></i>Payment - Insurance</label>
+                        <select name="payment_insurance">
+                            {% for option in options['payment_insurance'] %}
+                                <option value="{{ option }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-hand-holding-usd" style="color: #20BEFF; margin-right: 8px;"></i>Payment - Grants</label>
+                        <select name="payment_grants">
+                            {% for option in options['payment_grants'] %}
+                                <option value="{{ option }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-sync" style="color: #20BEFF; margin-right: 8px;"></i>Payment - Subscription</label>
+                        <select name="payment_subscription">
+                            {% for option in options['payment_subscription'] %}
+                                <option value="{{ option }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-gift" style="color: #20BEFF; margin-right: 8px;"></i>Payment - Free</label>
+                        <select name="payment_free">
+                            {% for option in options['payment_free'] %}
+                                <option value="{{ option }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-universal-access" style="color: #20BEFF; margin-right: 8px;"></i>Accessibility Goal</label>
+                        <select name="accessibility_goal">
+                            {% for option in options['accessibility_goal'] %}
+                                <option value="{{ option }}">{{ option }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Ownership:</label>
-                    <select name="ownership">
-                        {% for option in options['ownership'] %}
-                            <option value="{{ option }}">{{ option }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Budget (in thousands):</label>
-                    <input type="number" name="budget_k" min="5" max="500" value="50" required>
-                </div>
-                <div class="form-group">
-                    <label>Target Age Group:</label>
-                    <select name="target_age_group">
-                        {% for option in options['target_age_group'] %}
-                            <option value="{{ option }}">{{ option }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Location:</label>
-                    <select name="location">
-                        {% for option in options['location'] %}
-                            <option value="{{ option }}">{{ option }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Market Demand:</label>
-                    <select name="market_demand">
-                        {% for option in options['market_demand'] %}
-                            <option value="{{ option }}">{{ option }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Delivery Mode:</label>
-                    <select name="delivery_mode">
-                        {% for option in options['delivery_mode'] %}
-                            <option value="{{ option }}">{{ option }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Payment - Cash:</label>
-                    <select name="payment_cash">
-                        {% for option in options['payment_cash'] %}
-                            <option value="{{ option }}">{{ option }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Payment - Insurance:</label>
-                    <select name="payment_insurance">
-                        {% for option in options['payment_insurance'] %}
-                            <option value="{{ option }}">{{ option }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Payment - Grants:</label>
-                    <select name="payment_grants">
-                        {% for option in options['payment_grants'] %}
-                            <option value="{{ option }}">{{ option }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Payment - Subscription:</label>
-                    <select name="payment_subscription">
-                        {% for option in options['payment_subscription'] %}
-                            <option value="{{ option }}">{{ option }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Payment - Free:</label>
-                    <select name="payment_free">
-                        {% for option in options['payment_free'] %}
-                            <option value="{{ option }}">{{ option }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Accessibility Goal:</label>
-                    <select name="accessibility_goal">
-                        {% for option in options['accessibility_goal'] %}
-                            <option value="{{ option }}">{{ option }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <button type="submit">Predict</button>
+                <button type="submit" class="button" style="width: 200px; margin: 32px auto; font-size: 1.1em;">
+                    <i class="fas fa-magic" style="margin-right: 8px;"></i>Get Recommendations
+                </button>
             </form>
         </div>
 
         {% if recommendations %}
-            <div class="section results fade-in">
-                <h2>Prediction Results</h2>
-                <ul>
+            <div class="card" style="margin-top: 32px;">
+                <h2 style="color: #20BEFF; font-size: 1.2em; margin-bottom: 24px;">
+                    <i class="fas fa-chart-pie" style="margin-right: 8px;"></i>Recommended Business Models
+                </h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 24px;">
                     {% for model, confidence in recommendations %}
-                        <li>{{ model }} (Confidence: {{ confidence }}%)</li>
+                        <div class="card" style="margin: 0; background: #f8f9fa;">
+                            <h3 style="margin: 0 0 8px 0; font-size: 1.1em;">{{ model }}</h3>
+                            <div style="background: #e6f4ff; border-radius: 12px; padding: 8px; text-align: center;">
+                                <span style="font-size: 1.4em; font-weight: 600; color: #20BEFF;">{{ confidence }}%</span>
+                                <div style="font-size: 0.9em; color: #666; margin-top: 4px;">Confidence Score</div>
+                            </div>
+                        </div>
                     {% endfor %}
-                </ul>
-                <div class="visualizations">
-                    <div id="bar-chart"></div>
-                    <div id="pie-chart"></div>
+                </div>
+                <div class="visualizations" style="gap: 24px;">
+                    <div id="bar-chart" class="card" style="margin: 0;"></div>
+                    <div id="pie-chart" class="card" style="margin: 0;"></div>
                 </div>
                 <script>
-                    Plotly.newPlot('bar-chart', {{ bar_json | safe }});
-                    Plotly.newPlot('pie-chart', {{ pie_json | safe }});
+                    const barConfig = { responsive: true };
+                    const pieConfig = { responsive: true };
+                    const barData = JSON.parse('{{ bar_json | safe }}');
+                    const pieData = JSON.parse('{{ pie_json | safe }}');
+                    Plotly.newPlot('bar-chart', barData, barConfig);
+                    Plotly.newPlot('pie-chart', pieData, pieConfig);
                 </script>
             </div>
         {% endif %}

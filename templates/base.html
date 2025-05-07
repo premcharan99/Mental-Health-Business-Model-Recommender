@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mental Health Business Recommender{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Navigation</h2>
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/dataset">Dataset</a>
+        <a href="/visualizations">Visualizations</a>
+        <a href="/instructions">Instructions</a>
+    </div>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+    <script src="/static/js/scripts.js"></script>
+</body>
+</html>

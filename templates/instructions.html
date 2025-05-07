@@ -1,56 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Instructions - Mental Health Business Model Recommender</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="navbar-brand">Mental Health Recommender</div>
-        <ul class="navbar-links">
-            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
-            <li><a href="{{ url_for('dataset') }}">Dataset</a></li>
-            <li><a href="{{ url_for('visualizations') }}">Visualizations</a></li>
-            <li><a href="{{ url_for('instructions') }}" class="active">Instructions</a></li>
-        </ul>
-    </nav>
-    <div class="container">
-        <h1>Instructions & Explanations</h1>
-        <div class="section fade-in">
-            <h2>How It Works</h2>
-            <p>This system predicts the best business model for a mental health service using a Random Forest model trained on 2,000 synthetic records. Follow these steps:</p>
-            <ol>
-                <li><strong>Navigate to Dashboard</strong>: Select attributes like service type and budget using dropdowns.</li>
-                <li><strong>Submit</strong>: Click "Predict" to get the top 2–3 business models with confidence scores.</li>
-                <li><strong>View Results</strong>: See recommendations and visualizations (bar and pie charts) for clarity.</li>
-                <li><strong>Explore Dataset</strong>: Check the full dataset and download it.</li>
-                <li><strong>Understand Data</strong>: View dataset visualizations to see patterns.</li>
-            </ol>
-            <h2>Component Explanations</h2>
-            <ul>
-                <li><strong>Dashboard</strong>: Input form for service details, displays predictions (e.g., Subscription 70%), and shows charts to visualize confidence.</li>
-                <li><strong>Dataset</strong>: Table of 2,000 records (e.g., service type, business model) with a download button for analysis.</li>
-                <li><strong>Visualizations</strong>: Bar chart of service types (e.g., 40% Outpatient) and pie chart of business models (e.g., ~16% each) to understand data distribution.</li>
-                <li><strong>Instructions</strong>: This page, guiding usage and explaining components.</li>
-            </ul>
-            <h2>Attribute Information</h2>
-            <ul>
-                <li><strong>Service Type</strong>: Type of service (e.g., Teletherapy). Influences model (e.g., apps → Freemium).</li>
-                <li><strong>Ownership</strong>: Entity type (e.g., Private Nonprofit). Affects funding (e.g., grants → Nonprofit).</li>
-                <li><strong>Budget</strong>: Budget in $K (5–500). Small for apps ($20K), large for inpatient ($300K).</li>
-                <li><strong>Target Age Group</strong>: Clients (e.g., Young Adults). Impacts demand (e.g., Adults → high).</li>
-                <li><strong>Location</strong>: Area (e.g., Urban US). Urban → high demand, rural → nonprofits.</li>
-                <li><strong>Market Demand</strong>: Need level (e.g., High). High suits scalable models.</li>
-                <li><strong>Delivery Mode</strong>: Method (e.g., Online). Online → apps.</li>
-                <li><strong>Payment Methods</strong>: Cash, Insurance, Grants, Subscription, Free (Yes/No). Guide model (e.g., grants → Nonprofit).</li>
-                <li><strong>Accessibility Goal</strong>: Focus on underserved (e.g., High). High → nonprofits.</li>
-            </ul>
-            <h2>Example</h2>
-            <p><strong>Input</strong>: Teletherapy, Private For-Profit, $50K, Young Adults, Urban Global, High Demand, Online, Cash+Subscription, Medium Accessibility.</p>
-            <p><strong>Output</strong>: Subscription (70%), Freemium (20%), Pay-Per-Use (10%).</p>
-            <p><strong>Why</strong>: Online, for-profit, and subscription suggest scalable revenue (e.g., BetterHelp).</p>
-        </div>
-    </div>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Instructions{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Instructions</h1>
+    <p>Use the dashboard to input details about your mental health service. The system will predict the top business models suitable for your setup.</p>
+    <h2>Attributes</h2>
+    <ul>
+        <li><strong>Service Type</strong>: Type of service (e.g., Teletherapy, Outpatient).</li>
+        <li><strong>Ownership</strong>: Ownership model (e.g., Private For-Profit, Nonprofit).</li>
+        <li><strong>Budget</strong>: Budget in USD (5,000 to 500,000).</li>
+        <li><strong>Target Age Group</strong>: Primary audience (e.g., Young Adults, Seniors).</li>
+        <li><strong>Location</strong>: Service location (e.g., Urban Global, Rural Local).</li>
+        <li><strong>Market Demand</strong>: Demand level (Low, Medium, High).</li>
+        <li><strong>Delivery Mode</strong>: Service delivery (Online, In-Person, Hybrid).</li>
+        <li><strong>Payment Methods</strong>: Payment options (e.g., Cash, Insurance).</li>
+        <li><strong>Accessibility Goal</strong>: Accessibility priority (Low, Medium, High).</li>
+    </ul>
+    <p>After submitting, view predictions and visualizations on the dashboard. Explore the dataset and additional visualizations via the navigation menu.</p>
+</div>
+{% endblock %}

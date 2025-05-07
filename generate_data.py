@@ -1,73 +1,71 @@
-import random
+import pandas as pd
+import numpy as np
 import json
+import os
 
-# Define options
-service_types = ["Outpatient", "Teletherapy", "Inpatient", "Wellness App", "Community Program"]
-ownerships = ["Private For-Profit", "Private Nonprofit", "Public"]
-age_groups = ["Children", "Teens", "Young Adults", "Adults", "Seniors", "All Ages"]
-locations = ["Urban US", "Rural US", "Urban Global", "Rural Global"]
-demands = ["Low", "Medium", "High"]
-deliveries = ["In-Person", "Online", "Hybrid"]
-access_goals = ["Low", "Medium", "High"]
-business_models = ["Subscription", "Freemium", "Pay-Per-Use", "Insurance-Based", "Nonprofit", "B2B Partnership"]
+np.random.seed(42)
 
-# Generate 2000 records
-data = []
-for i in range(2000):
-    service = random.choices(service_types, weights=[0.4, 0.2, 0.15, 0.15, 0.1])[0]
-    ownership = random.choices(ownerships, weights=[0.4, 0.3, 0.3])[0]
-    budget = random.randint(5, 500)
-    age = random.choices(age_groups, weights=[0.05, 0.15, 0.25, 0.3, 0.05, 0.2])[0]
-    loc = random.choices(locations, weights=[0.5, 0.2, 0.2, 0.1])[0]
-    demand = random.choices(demands, weights=[0.2, 0.3, 0.5])[0]
-    delivery = random.choices(deliveries, weights=[0.5, 0.3, 0.2])[0]
-    access = random.choices(access_goals, weights=[0.2, 0.5, 0.3])[0]
+# Define attributes and their possible values
+attributes = {
+    'Service Type': ['Teletherapy', 'Outpatient', 'Inpatient', 'Crisis Intervention', 'Support Group'],
+    'Ownership': ['Private For-Profit', 'Nonprofit', 'Government'],
+    'Budget': list(range(5000, 500001, 5000)),
+    'Target Age Group': ['Children', 'Young Adults', 'Adults', 'Seniors'],
+    'Location': ['Urban Global', 'Urban Local', 'Rural Local'],
+    'Market Demand': ['Low', 'Medium', 'High'],
+    'Delivery Mode': ['Online', 'In-Person', 'Hybrid'],
+    'Payment Methods': ['Cash', 'Insurance', 'Grants', 'Subscription', 'Free'],
+    'Accessibility Goal': ['Low', 'Medium', 'High'],
+    'Business Model': ['Subscription', 'Nonprofit', 'Freemium', 'Pay-Per-Use', 'Government-Funded', 'Hybrid']
+}
 
-    # Payment methods with correlations
-    cash = 1 if random.random() < (
-        0.6 if service in ["Outpatient", "Teletherapy"] and ownership == "Private For-Profit" else 0.3) else 0
-    insurance = 1 if random.random() < (0.8 if service in ["Outpatient", "Inpatient"] else 0.2) else 0
-    grants = 1 if random.random() < (0.7 if ownership in ["Private Nonprofit", "Public"] else 0.1) else 0
-    subscription = 1 if random.random() < (0.7 if service in ["Teletherapy", "Wellness App"] else 0.1) else 0
-    free = 1 if random.random() < (
-        0.5 if ownership in ["Private Nonprofit", "Public"] and access == "High" else 0.1) else 0
+# Generate synthetic dataset with conditional probabilities
+n_records = 2000
+data = {attr: [] for attr in attributes}
+for _ in range(n_records):
+    service_type = np.random.choice(attributes['Service Type'], p=[0.4, 0.3, 0.15, 0.1, 0.05])
+    data['Service Type'].append(service_type)
 
-    # Assign business model with balancing
-    if i % 6 == 0:
-        model = business_models[i % 6]
-    elif service == "Wellness App" and subscription and free:
-        model = "Freemium"
-    elif service in ["Teletherapy", "Wellness App"] and subscription and ownership == "Private For-Profit":
-        model = "Subscription"
-    elif cash and not subscription and service in ["Outpatient", "Teletherapy"]:
-        model = "Pay-Per-Use"
-    elif insurance and service in ["Outpatient", "Inpatient"]:
-        model = "Insurance-Based"
-    elif grants or free and ownership in ["Private Nonprofit", "Public"]:
-        model = "Nonprofit"
+    ownership = np.random.choice(attributes['Ownership'], p=[0.5, 0.3, 0.2])
+    data['Ownership'].append(ownership)
+
+    budget = np.random.choice(attributes['Budget'])
+    data['Budget'].append(budget)
+
+    target_age = np.random.choice(attributes['Target Age Group'], p=[0.2, 0.4, 0.3, 0.1])
+    data['Target Age Group'].append(target_age)
+
+    location = np.random.choice(attributes['Location'], p=[0.5, 0.3, 0.2])
+    data['Location'].append(location)
+
+    market_demand = np.random.choice(attributes['Market Demand'], p=[0.2, 0.5, 0.3])
+    data['Market Demand'].append(market_demand)
+
+    delivery_mode = np.random.choice(attributes['Delivery Mode'], p=[0.5, 0.3, 0.2])
+    data['Delivery Mode'].append(delivery_mode)
+
+    payment_methods = np.random.choice(attributes['Payment Methods'], p=[0.2, 0.6, 0.1, 0.05, 0.05])
+    data['Payment Methods'].append(payment_methods)
+
+    accessibility_goal = np.random.choice(attributes['Accessibility Goal'], p=[0.3, 0.4, 0.3])
+    data['Accessibility Goal'].append(accessibility_goal)
+
+    # Conditional business model based on service type and market demand
+    if service_type == 'Teletherapy' and market_demand == 'High' and delivery_mode == 'Online':
+        business_model = np.random.choice(attributes['Business Model'], p=[0.6, 0.1, 0.15, 0.1, 0.05, 0.0])
+    elif ownership == 'Nonprofit':
+        business_model = np.random.choice(attributes['Business Model'], p=[0.1, 0.6, 0.1, 0.1, 0.05, 0.05])
     else:
-        model = "B2B Partnership"
+        business_model = np.random.choice(attributes['Business Model'], p=[0.35, 0.2, 0.15, 0.15, 0.1, 0.05])
+    data['Business Model'].append(business_model)
 
-    record = {
-        "service_type": service,
-        "ownership": ownership,
-        "budget_k": budget,
-        "target_age_group": age,
-        "location": loc,
-        "market_demand": demand,
-        "delivery_mode": delivery,
-        "payment_cash": cash,
-        "payment_insurance": insurance,
-        "payment_grants": grants,
-        "payment_subscription": subscription,
-        "payment_free": free,
-        "accessibility_goal": access,
-        "business_model": model
-    }
-    data.append(record)
+# Create DataFrame
+df = pd.DataFrame(data)
 
 # Save to JSON
-with open('mental_health_business_2000.json', 'w') as f:
-    json.dump(data, f, indent=2)
+os.makedirs('data', exist_ok=True)
+df.to_json('data/mental_health_business_2000.json', orient='records', lines=True)
 
-print("Generated 2000 records in 'mental_health_business_2000.json'")
+print(f"Dataset generated and saved to data/mental_health_business_2000.json with {n_records} records.")
+print("Business Model distribution:")
+print(df['Business Model'].value_counts())

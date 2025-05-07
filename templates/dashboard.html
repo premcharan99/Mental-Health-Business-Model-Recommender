@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Business Model Prediction</h1>
+    <form method="POST">
+        <label>Service Type</label>
+        <select name="service_type" required>
+            <option value="Teletherapy">Teletherapy</option>
+            <option value="Outpatient">Outpatient</option>
+            <option value="Inpatient">Inpatient</option>
+            <option value="Crisis Intervention">Crisis Intervention</option>
+            <option value="Support Group">Support Group</option>
+        </select>
+        <label>Ownership</label>
+        <select name="ownership" required>
+            <option value="Private For-Profit">Private For-Profit</option>
+            <option value="Nonprofit">Nonprofit</option>
+            <option value="Government">Government</option>
+        </select>
+        <label>Budget (USD)</label>
+        <input type="number" name="budget" min="5000" max="500000" step="5000" required>
+        <label>Target Age Group</label>
+        <select name="target_age_group" required>
+            <option value="Children">Children</option>
+            <option value="Young Adults">Young Adults</option>
+            <option value="Adults">Adults</option>
+            <option value="Seniors">Seniors</option>
+        </select>
+        <label>Location</label>
+        <select name="location" required>
+            <option value="Urban Global">Urban Global</option>
+            <option value="Urban Local">Urban Local</option>
+            <option value="Rural Local">Rural Local</option>
+        </select>
+        <label>Market Demand</label>
+        <select name="market_demand" required>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+        <label>Delivery Mode</label>
+        <select name="delivery_mode" required>
+            <option value="Online">Online</option>
+            <option value="In-Person">In-Person</option>
+            <option value="Hybrid">Hybrid</option>
+        </select>
+        <label>Payment Methods</label>
+        <select name="payment_methods" required>
+            <option value="Cash">Cash</option>
+            <option value="Insurance">Insurance</option>
+            <option value="Grants">Grants</option>
+            <option value="Subscription">Subscription</option>
+            <option value="Free">Free</option>
+        </select>
+        <label>Accessibility Goal</label>
+        <select name="accessibility_goal" required>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+        <button type="submit" class="btn">Predict</button>
+    </form>
+    {% if predictions %}
+    <h2>Predictions</h2>
+    <ul>
+        {% for model, prob in predictions %}
+        <li>{{ model }}: {{ prob | round(1) }}%</li>
+        {% endfor %}
+    </ul>
+    <div id="prediction-chart"></div>
+    <script>
+        var graph = {{ graph_json | safe }};
+        Plotly.newPlot('prediction-chart', graph.data, graph.layout);
+    </script>
+    {% endif %}
+</div>
+{% endblock %}

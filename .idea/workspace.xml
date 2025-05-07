@@ -5,15 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6a7ea32-121f-4350-b2c1-256a5f90ffa3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/dataset.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/instructions.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/visualizations.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/scripts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/landing.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_model_rf.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/feature_columns.pkl" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/generate_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/generate_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mental_health_business_2000.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/static/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/dataset.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dataset.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/instructions.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/instructions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/visualizations.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/visualizations.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +62,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.app">
+  <component name="RunManager" selected="Python.train_model">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MentalHealthBusinessModel" />
       <option name="ENV_FILES" value="" />
@@ -146,9 +153,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.app" />
         <item itemvalue="Python.train_model" />
         <item itemvalue="Python.generate_data" />
+        <item itemvalue="Python.app" />
       </list>
     </recent_temporary>
   </component>
